@@ -72,3 +72,26 @@
     - Successful!
 
 ![MyCrypto_Success](./Screenshots/transaction_successful.PNG)
+
+Challenge mode
+---
+
+10. Create a separate bootnode dedicated to connecting peers together
+
+- in blockchain tools directory run ./bootnode -genkey daan.key
+    - -genkey flag creates the bootnode key (daan.key in this case)
+- then run ./bootnode -nodekey daan.key -addr :30305
+    - -nodekey flag points to the daan.key to run
+    - -addr flag assigns the port
+- copy/paste the generated enode when starting the node
+
+11. There will be a new DevOps engineer joining the team, add an additional sealer address to the network on the fly!
+
+- Generate a new node as we did before (./geth account new --datadir daan_node3)
+- in the running nodes gitbash windows type:
+- clique.propose("0xNODE3_ADDRESS", true)
+    - authorizes the new signer, should be authorized by more than 50% of the nodes. As such in this case daan_node1 and daan_node2 need to authorize, thus run this command in both gitbash running node windows
+- clique.proposals
+    - shows the current proposals the node is voting on, ie confirms the previous command is being handled
+- clique.getSigners()
+    - retrieves the list of authorized signers at the specified block, so confirms daan_node3 as authorized (or not)
