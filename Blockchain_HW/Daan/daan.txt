@@ -1,0 +1,11 @@
+**daan_node1**
+Public address of the key:   0xC008597C71053290cECbFD8100494Cc7706f75eA
+Path of the secret key file: daan_node1\keystore\UTC--2020-07-28T17-53-59.739320400Z--c008597c71053290cecbfd8100494cc7706f75ea
+
+./geth --datadir daan_node1 --unlock "C008597C71053290cECbFD8100494Cc7706f75eA" --mine --rpc --allow-insecure-unlock
+
+**daan_node2**
+Public address of the key:   0x971f5345b1434607B63473b3a7301845BcD394B4
+Path of the secret key file: daan_node2\keystore\UTC--2020-07-28T17-54-33.001288300Z--971f5345b1434607b63473b3a7301845bcd394b4
+
+./geth --datadir daan_node2 --unlock "971f5345b1434607B63473b3a7301845BcD394B4" --mine --port 30304 --bootnodes enode://6fd2c7de8b16521bbb23e85b4dc4b6336c4c8d0bfb803355bbca8d70276954206f6253cd5737fb32cdfdb39cff43a3e1e8cb362c83c73de898c3994ddfa21b45@127.0.0.1:30303 --miner.threads 1 --ipcdisable
