@@ -48,7 +48,7 @@
     - After install MyCrypto, homepage should look like this
 
 
-![MyCrypto_Homepage](./Screenshots/MyCrypto_Homepage.PNG)
+![MyCrypto_Homepage](./Screenshots/MyCrypto_homepage.PNG)
 
     - Our DAAN network needs to be setup, so we go to 'change network' on the bottom left and select '+ Add Custome Node'
 
