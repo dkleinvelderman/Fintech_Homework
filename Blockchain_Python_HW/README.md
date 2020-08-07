@@ -1,6 +1,17 @@
 # Fintech Bootcamp - Blockchain Python Homework - Daniel Klein Velderman
 
 1. Transaction
+
+from wallet import *
+
+btc_acc = priv_key_account(BTCTEST, derive_wallets(mnemonic, BTCTEST,5)[0]['privkey'])
+
+eth_acc = priv_key_account(ETH, derive_wallets(mnemonic, ETH,5)[0]['privkey'])
+
+send_tx(BTCTEST, btc_acc, derive_wallets(mnemonic, BTCTEST, 5)[1]['address'], 0.000004)
+
+send_tx(ETH, eth_acc, derive_wallets(mnemonic, ETH, 5)[1]['address'], 31)
+
 ![BTC](./Screenshots/BTC_TX_confirmed.PNG)
 ![ETH](./Screenshots/ETH_TX_conf.PNG)
 
