@@ -8,12 +8,22 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/distribution/RefundablePostDeliveryCrowdsale.sol";
 
 // @TODO: Inherit the crowdsale contracts
-contract PupperCoinSale is {
-
+contract PupperCoinSale is Crowdsale, MintedCrowdsale, TimedCrowdsale,CappedCrowdsale, RefundablePostDeliveryCrowdsale {
+    // @TODO: Fill in the constructor parameters!
     constructor(
-        // @TODO: Fill in the constructor parameters!
+        uint rate,
+        address payable wallet,
+        PupperCoin token, 
+        uint open_time,
+        uint close_time,
+        uint goal
     )
         // @TODO: Pass the constructor parameters to the crowdsale contracts.
+        Crowdsale(rate, wallet, token)
+        TimedCrowdsale(open_time, close_time)
+        CappedCrowdsale(goal)
+        RefundableCrowdsale(goal)
+        RefundablePostDeliveryCrowdsale()
         public
     {
         // constructor can stay empty
@@ -24,15 +34,27 @@ contract PupperCoinSaleDeployer {
 
     address public token_sale_address;
     address public token_address;
-
+    uint open_time;
+    uint close_time;
+    uint goal=300;
+// @TODO: Fill in the constructor parameters!
     constructor(
-        // @TODO: Fill in the constructor parameters!
+        string memory name,
+        string memory symbol,
+        address payable wallet // this address will receive all Ether raised by the sale
     )
         public
     {
-        // @TODO: create the PupperCoin and keep its address handy
+        // create the Puppercoin token and keep its address handy
+        PupperCoin token = new PupperCoin(name, symbol, 0);
+        token_address = address(token);
+        
+        open_time=now;
+        close_time=open_time+24 weeks;
 
-        // @TODO: create the PupperCoinSale and tell it about the token, set the goal, and set the open and close times to now and now + 24 weeks.
+        // create the PupperCoinSale and tell it about the token
+        PupperCoinSale token_sale = new PupperCoinSale(1, wallet, token, open_time, close_time, goal);
+        token_sale_address = address(token_sale);
 
         // make the PupperCoinSale contract a minter, then have the PupperCoinSaleDeployer renounce its minter role
         token.addMinter(token_sale_address);
